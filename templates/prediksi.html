@@ -1,0 +1,211 @@
+{% include 'header.html' %}
+
+<body class="g-sidenav-show   bg-gray-100">
+    <div class="min-height-300 bg-primary position-absolute w-100"></div>
+    {% include 'navbar.html' %}
+    <main class="main-content position-relative border-radius-lg ">
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur"
+            data-scroll="false">
+            <div class="container-fluid py-1 px-3">
+                <nav aria-label="breadcrumb">
+                    <h6 class="font-weight-bolder text-white mb-0">Prediksi</h6><br><br><br>
+                </nav>
+            </div>
+        </nav>
+
+        <div class="container-fluid py-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mb-4">
+                        <div class="card-header pb-0">
+                            <h5>Choose File</h5>
+                            <div class="card-body">
+                                <form action="/table" method="POST" enctype="multipart/form-data">
+                                    <input type="file" name="csvfile1" />
+                                    <input type="hidden" name="vaccine" value="ptm" />
+                                    <input type="submit" class="btn btn-primary btn-sm" value="Submit"/>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card-body px-0 pt-0 pb-2">
+                            <div class="table-responsive p-0">
+                                <table class="datatable" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                No</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Konten</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Case Folding</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Tokenizing</th>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Stopword Removal</th>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Label</th>
+                                            <!-- <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Tanggal</th> -->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% set no = namespace(value=1) %}
+                                        {% for data in dataTabel %}
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm text-center">{{ data[0] }}</h6>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs text-center font-weight-bold mb-0">{{ data[1] }}</p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs text-center font-weight-bold mb-0">{{ data[2] }}</p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs text-center font-weight-bold mb-0">{{ data[3] }}</p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs text-center font-weight-bold mb-0">{{ data[4] }}</p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs text-center font-weight-bold mb-0">{{ data[5] }}</p>
+                                            </td>
+                                            <!-- <td>
+                                                <p class="text-xs text-center font-weight-bold mb-0">{{ data[6] }}</p>
+                                            </td> -->
+                                            
+                                            {% set no.value = no.value + 1 %}
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            {% if dataGrafik is defined %}
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mb-4">
+                        <div class="card-header pb-0">
+                            <h5>Grafik</h5>
+                        </div>
+                        <div class="card-body px-0 pt-0 pb-2">
+                            <div class="table-responsive p-0">
+                                <!-- <ul>
+                                {% for key, value in dataGrafik.items() %}
+                                    <li>{{ key }},{{value[0]}},{{value[1]}},{{value[2]}}</li>
+                                {% endfor%}
+                                </ul> -->
+
+
+                                <canvas id="myChart" width="1000" height="400"></canvas>
+                                <ul>
+                                    <li>Positif: {{ percentage[0] }}%</li>
+                                    <li>Negatif: {{ percentage[2] }}%</li>
+                                    <li>Netral: {{ percentage[1] }}%</li>
+                                    <li>Positif Paling Banyak Di Bulan {{ maxdata[0]}}</li>
+                                    <li>Netral Paling Banyak Di Bulan {{ maxdata[1]}}</li>
+                                    <li>Negatif Paling Banyak Di Bulan {{ maxdata[2]}}</li>
+                                </ul>
+                                <script>
+                                const ctx = document.getElementById('myChart').getContext('2d');
+                                const myChart = new Chart(ctx, {
+                                    type: 'line',
+                                    data: {
+                                        labels: [
+                                        {% for key, value in dataGrafik.items() %}
+                                                '{{ key }}',
+                                            {% endfor%}
+                                        ],
+                                        datasets: [{
+                                            label: 'Positif',
+                                            backgroundColor: 'rgb(0, 0, 255)',
+                                            borderColor: 'rgb(0, 0, 255)',
+                                            data: [
+                                            {% for key, value in dataGrafik.items() %}
+                                                {{ value[0] }},
+                                            {% endfor%}
+
+                                            ],
+                                        },{
+                                            label: 'Netral',
+                                            backgroundColor: 'rgb(0, 255, 0)',
+                                            borderColor: 'rgb(0, 255, 0)',
+                                            data: [
+                                            {% for key, value in dataGrafik.items() %}
+                                                {{ value[2] }},
+                                            {% endfor%}
+                                            ],
+                                        },{
+                                            label: 'Negatif',
+                                            backgroundColor: 'rgb(255, 0, 0)',
+                                            borderColor: 'rgb(255, 0, 0)',
+                                            data: [
+                                            {% for key, value in dataGrafik.items() %}
+                                                {{ value[1] }},
+                                            {% endfor%}
+                                            ],
+                                        }]
+                                    },
+                                    options: {
+                                        responsive: false,
+                                        scales: {
+                                            y: {
+                                                beginAtZero: true
+                                            }
+                                        }
+                                    }
+                                });
+                                </script>
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <footer class="footer pt-3  ">
+                <div class="container-fluid">
+                    <div class="row align-items-center justify-content-lg-between">
+                        <div class="col-lg-6 mb-lg-0 mb-4">
+                            <div class="copyright text-center text-sm text-muted text-lg-start">
+                                ©
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script>,
+                                made by
+                                <a href="/" class="font-weight-bold" target="_blank">Osa</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        </div>
+    </main>
+    </div>
+    {% include 'footer.html' %}
+</body>
+
+</html>

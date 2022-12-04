@@ -1,0 +1,85 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Dataset {% endblock title %}
+
+{% block content %}
+<!-- Main content -->
+<div class="main-content" id="panel">
+  <!-- Header -->
+  <div class="header bg-primary pb-6">
+    <div class="container-fluid">
+      <div class="header-body">
+        <div class="row align-items-center py-4">
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item"><a href=""><i class="fas fa-home"></i></a></li>
+              <li class="breadcrumb-item active">Dataset</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Page content -->
+  <div class="container-fluid mt--6">
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <!-- Light table -->
+          <div class="table-responsive">
+            <table class="dataTable table-flush" id="data_table" style="width:100%">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col" class="sort">No</th>
+                  <th scope="col" class="sort">Label</th>
+                  <th scope="col" class="sort">Username</th>
+                  <th scope="col" class="sort" style="width: 80%;">Konten</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                {% set no = namespace(value=1) %}
+                {% for data in datas %}
+                <tr>
+                  <th scope="row">
+                    <span class="name mb-0 text-sm">{{ no.value }}</span>
+                  </th>
+                  <td class="name mb-0 text-sm">
+                    {{ data[1] }}
+                  </td>
+                  <td>
+                    <span class="name mb-0 text-sm">@{{ data[2] }}</span>
+                  </td>
+                  <td>
+                    <span class="name mb-0 text-sm">{{ data[3] }}</span>
+                  </td>
+                  {% set no.value = no.value + 1 %}
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <!-- Card footer -->
+          <div class="card-footer py-4">
+          </div>
+        </div>
+      </div>
+    </div>
+    {% include "includes/footer.html" %}
+  </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#data_table').DataTable();
+  });
+</script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+
+
+
+{% endblock javascripts %}

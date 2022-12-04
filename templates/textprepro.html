@@ -1,0 +1,205 @@
+{% include 'header.html' %}
+<body class="g-sidenav-show   bg-gray-100">
+    <div class="min-height-300 bg-primary position-absolute w-100"></div>
+    {% include 'navbar.html' %}
+    <main class="main-content position-relative border-radius-lg ">
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur"
+            data-scroll="false">
+            <div class="container-fluid py-1 px-3">
+                <nav aria-label="breadcrumb">
+                    <h6 class="font-weight-bolder text-white mb-0">Dashboard / Text Pre Processing</h6><br><br><br>
+                </nav>
+            </div>
+        </nav>
+
+        <div class="container-fluid py-4">
+            <div class="row">
+                <!-- <div class="col-12">
+                    <div class="card mb-4">
+                        <div class="card-header pb-0">
+                            <h6>Clean Message</h6>
+                        </div>
+                        <div class="card-body px-0 pt-0 pb-2">
+                            <div class="table-responsive p-1">
+                                <table class="datatable" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <td
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                No</td>
+                                            <td
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Konten</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% set no = namespace(value=1) %}
+                                        {% for cm in clean_msg %}
+                                        <tr>
+                                            <td>
+                                                 <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm text-center">{{ no.value }}</h6>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class=" text-sm">
+                                                <p class="text-xs font-weight-bold mb-0">{{ cm }}</p>
+                                            </td>
+                                            {% set no.value = no.value + 1 %}
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- <div class="col-12">
+                    <div class="card mb-4">
+                        <div class="card-header pb-0">
+                            <h6>Lower Message</h6>
+                        </div>
+                        <div class="card-body px-0 pt-0 pb-2">
+                            <div class="table-responsive p-1">
+                                <table class="datatable" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                No</th>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Konten</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% set no = namespace(value=1) %}
+                                        {% for ml in msg_lower %}
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm text-center">{{ no.value }}</h6>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class=" text-sm">
+                                                <p class="text-xs font-weight-bold mb-0">{{ ml }}</p>
+                                            </td>
+                                            {% set no.value = no.value + 1 %}
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- <div class="col-12">
+                    <div class="card mb-4">
+                        <div class="card-header pb-0">
+                            <h6>Tokenizing</h6>
+                        </div>
+                        <div class="card-body px-0 pt-0 pb-2">
+                            <div class="table-responsive p-1">
+                                <table class="datatable" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                No</th>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Konten</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% set no = namespace(value=1) %}
+                                        {% for t in token %}
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm text-center">{{ no.value }}</h6>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class=" text-sm">
+                                                <p class="text-xs font-weight-bold mb-0">{{ t }}</p>
+                                            </td>
+                                            {% set no.value = no.value + 1 %}
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="col-12">
+                    <div class="card mb-4">
+                        <div class="card-header pb-0">
+                            <h6>Filtering</h6>
+                        </div>
+                        <div class="card-body px-0 pt-0 pb-2">
+                            <div class="table-responsive p-1">
+                                <table class="datatable" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                No</th>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Konten</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% set no = namespace(value=1) %}
+                                        {% for f in filter %}
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm text-center">{{ no.value }}</h6>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class=" text-sm">
+                                                <p class="text-xs font-weight-bold mb-0">{{ f }}</p>
+                                            </td>
+                                            {% set no.value = no.value + 1 %}
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer pt-3  ">
+                <div class="container-fluid">
+                    <div class="row align-items-center justify-content-lg-between">
+                        <div class="col-lg-6 mb-lg-0 mb-4">
+                            <div class="copyright text-center text-sm text-muted text-lg-start">
+                                ©
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script>,
+                                made by
+                                <a href="/" class="font-weight-bold" target="_blank">Osa Mahanani.S.</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        </div>
+    </main>
+    </div>
+    {% include 'footer.html' %}
+</body>
+
+</html>
